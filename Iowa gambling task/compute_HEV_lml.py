@@ -68,19 +68,19 @@ def download_to_disk(url, filepath):
 
 #
 data_busemeyer_url = 'https://osf.io/download/5vws6/'  # DataBusemeyerNoNA.rdata on https://osf.io/f9cq4/; contains IGT data
-data_busemeyer_file = 'DataBusemeyerNoNA.rdata'
+data_busemeyer_file = 'Data/DataBusemeyerNoNA.rdata'
 
 data_steingroever_url = 'https://osf.io/download/bmnsv/'  # contains Steingroever's importance sampling marginal likelihoods
-data_steingroever_file = 'DataSteingroever.rdata'
+data_steingroever_file = 'Data/DataSteingroever.rdata'
 
 lml_url = 'https://osf.io/download/txnbs/' # ind_LogMargLik.txt on https://osf.io/f9cq4/; contains Gronau's bridge sampling estmates
-lml_file = 'ind_LogMargLik.txt'
+lml_file = 'Data/ind_LogMargLik.txt'
 
 download_to_disk(data_busemeyer_url, data_busemeyer_file)
 download_to_disk(data_steingroever_url, data_steingroever_file)
 download_to_disk(lml_url, lml_file)
 
-data_file = pr.read_r('DataBusemeyerNoNA.rdata')
+data_file = pr.read_r(data_busemeyer_file)
 choices = jnp.asarray(data_file['choice'].to_numpy().astype(int)) - 1  # Python zero-indexing
 losses = jnp.asarray(data_file['lo'].to_numpy())
 wins = jnp.asarray(data_file['wi'].to_numpy())
